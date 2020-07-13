@@ -1,0 +1,38 @@
+.imageupload {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.image__progress {
+  margin-left: auto;
+  margin-right: auto;
+  width: 350px;
+}
+
+.image__caption {
+  margin-left: auto;
+  margin-right: auto;
+  width: 350px;
+  height: 20px;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.image__file {
+  margin-left: auto;
+  margin-right: auto;
+  width: 350px;
+  height: 40px;
+  margin-top: 10px;
+}
+.image__uploadButton {
+  width: 200px;
+  height: 50px;
+  padding: 5px;
+  margin-top: 10px;
+}
