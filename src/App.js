@@ -2,41 +2,12 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 import Post from "./Post";
 import { db, auth } from "./Firebase";
-import Modal from "@material-ui/core/Modal";
-import { makeStyles } from "@material-ui/core/styles";
 import { Button, Input } from "@material-ui/core";
 import ImageUpload from "./ImageUpload";
 import InstagramEmbed from "react-instagram-embed";
 
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    position: "absolute",
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
-
 function App() {
-  const classes = useStyles();
-
-  const [modalStyle] = useState(getModalStyle);
-
   const [post, setPost] = useState([]);
-  const [open, setOpen] = useState(false);
   const [openSignIn, setOpenSignIn] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -47,7 +18,6 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
       if (authUser) {
-        console.log(authUser);
         setUser(authUser);
       } else {
         //user has logged out
@@ -55,6 +25,14 @@ function App() {
       }
     });
   }, [user, username]);
+
+  useEffect(() => {
+    db.collection("posts")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        setPost(snapshot.docs.map((doc) => ({ id: doc.id, post: doc.data() })));
+      });
+  }, []);
 
   const signIn = (event) => {
     event.preventDefault();
@@ -82,19 +60,11 @@ function App() {
       password: password,
       username: username,
     });
-    setOpen(false);
+    setOpenSignIn(false);
     setEmail("");
     setUsername("");
     setPassword("");
   };
-
-  useEffect(() => {
-    db.collection("posts")
-      .orderBy("timestamp", "desc")
-      .onSnapshot((snapshot) => {
-        setPost(snapshot.docs.map((doc) => ({ id: doc.id, post: doc.data() })));
-      });
-  }, []);
 
   return (
     <div className="App">
@@ -148,22 +118,6 @@ function App() {
         <div>
           {user ? (
             <div className="app__posts">
-              <div className="app__postRight">
-                <h4>Developer Profile:</h4>
-                <InstagramEmbed
-                  url="https://www.instagram.com/p/CCOgGuAHFpa/?utm_source=ig_web_copy_link"
-                  maxWidth={380}
-                  hideCaption={false}
-                  containerTagName="div"
-                  protocol=""
-                  injectScript
-                  onLoading={() => {}}
-                  onSuccess={() => {}}
-                  onAfterRender={() => {}}
-                  onFailure={() => {}}
-                />
-              </div>
-
               <div className="app__postLeft">
                 <h2 style={{ padding: "5px", width: "auto", height: "auto" }}>
                   App users:

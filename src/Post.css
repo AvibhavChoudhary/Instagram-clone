@@ -1,5 +1,5 @@
 .post {
-  max-width: 400px;
+  max-width: 600px;
   background-color: white;
   border: 1px solid lightgray;
   margin-bottom: 45px;
@@ -28,6 +28,7 @@
 .post__header {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   padding: 10px;
 }
 
@@ -48,6 +49,11 @@
   object-fit: contain;
 }
 
+.post__userinfo {
+  display: flex;
+  flex-direction: row;
+}
+
 .post__input {
   flex: 1;
   padding: 10px;
@@ -66,7 +72,6 @@
   padding: 10px;
 }
 
-.post__deleteButton {
-  margin-left: 130px;
-  max-width: 10px;
+.post__commentActive {
+  color: blue;
 }

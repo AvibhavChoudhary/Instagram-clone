@@ -25,13 +25,12 @@
 .app__signup {
   display: flex;
   flex-direction: column;
+  height: 80vh;
 }
 
 .app__posts {
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: auto;
 }
 
 .app__footerUpload {
@@ -60,10 +59,7 @@
   margin-left: 400px;
 }
 
-.app__postRight {
-  width: 340px;
-}
-
 .app__postLeft {
-  width: 340px;
+  margin: auto;
+  width: 500px;
 }

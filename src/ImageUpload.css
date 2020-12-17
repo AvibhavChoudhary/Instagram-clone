@@ -36,3 +36,9 @@
   padding: 5px;
   margin-top: 10px;
 }
+
+.upload__success {
+  color: green;
+  margin: auto;
+  padding: 10px;
+}

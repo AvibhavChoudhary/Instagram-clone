@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Post.css";
 import Avatar from "@material-ui/core/Avatar";
 import { db } from "./Firebase";
-import firebase from "firebase";
+import firebase, { auth } from "firebase";
 import { Button } from "@material-ui/core";
 
 function Post({ postId, user, username, imageUrl, caption }) {
@@ -41,9 +41,7 @@ function Post({ postId, user, username, imageUrl, caption }) {
 
   const deletePost = (event) => {
     event.preventDefault();
-    if (db.collection("post").doc(postId).collection("comments")) {
-      db.collection("post").doc(postId).collection("comments").doc(id).delete();
-    }
+
     db.collection("posts").doc(postId).delete();
   };
 
@@ -54,12 +52,14 @@ function Post({ postId, user, username, imageUrl, caption }) {
   return (
     <div className="post">
       <div className="post__header">
-        <Avatar
-          className="post__avatar"
-          alt={username}
-          src="/static/images/avatar/1.jpg"
-        />
-        <h3 className="post__username">{username}</h3>
+        <div className="post__userinfo">
+          <Avatar
+            className="post__avatar"
+            alt={username}
+            src="/static/images/avatar/1.jpg"
+          />
+          <h3 className="post__username">{username}</h3>
+        </div>
         <div className="post__deleteButton">
           {user.displayName === username && (
             <Button
@@ -87,7 +87,8 @@ function Post({ postId, user, username, imageUrl, caption }) {
               <strong>{comment.username}</strong> {comment.text}
             </p>
             <div>
-              {user.displayName === comment.username && (
+              {(user.displayName === username ||
+                user.displayName === comment.username) && (
                 <Button
                   className="post__removeComment"
                   variant="contained"
@@ -114,7 +115,7 @@ function Post({ postId, user, username, imageUrl, caption }) {
           />
           <button
             disabled={!comment}
-            className="post__button"
+            className={`post__button ${comment && "post__commentActive"} `}
             type="submit"
             onClick={postComment}
           >

@@ -8,6 +8,7 @@ function ImageUpload({ user }) {
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     if (e.target.files[0]) {
@@ -16,6 +17,7 @@ function ImageUpload({ user }) {
   };
 
   const handleUpload = () => {
+    setSuccess(false);
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
 
     uploadTask.on(
@@ -45,6 +47,7 @@ function ImageUpload({ user }) {
             setProgress(0);
             setCaption("");
             setImage(null);
+            setSuccess(true);
           });
       }
     );
@@ -74,6 +77,12 @@ function ImageUpload({ user }) {
           Upload
         </Button>
       </center>
+      {success && (
+        <div className="upload__success">
+          <h2>Your post successfully uploaded,</h2>
+          <p> Please go back and check it out</p>
+        </div>
+      )}
     </div>
   );
 }
