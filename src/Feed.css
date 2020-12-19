@@ -1,0 +1,15 @@
+.feed__header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  object-fit: contain;
+  background-color: white;
+  padding: 10px;
+  border-bottom: 1px solid lightgray;
+  display: flex;
+  justify-content: space-between;
+}
+.feed__posts {
+  width: 500px;
+  margin: auto;
+}

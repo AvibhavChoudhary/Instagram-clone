@@ -1,0 +1,30 @@
+.app__signup {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+}
+.app__headerImage {
+  object-fit: contain;
+}
+
+.app__input {
+  min-width: 350px;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.signup__submitButton {
+  margin-top: 30px;
+  padding: 10px;
+}
+
+.signup__button {
+  width: 300px;
+}
+
+.signup__footer {
+  margin-top: 20px;
+}

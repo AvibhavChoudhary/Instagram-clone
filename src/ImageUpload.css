@@ -42,3 +42,8 @@
   margin: auto;
   padding: 10px;
 }
+
+.imageupload__backToFeed {
+  margin-top: 20px;
+  font-size: large;
+}

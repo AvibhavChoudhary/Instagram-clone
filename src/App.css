@@ -6,33 +6,6 @@
   background-color: #fafafa;
 }
 
-.app__header {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-  object-fit: contain;
-  background-color: white;
-  padding: 10px;
-  border-bottom: 1px solid lightgray;
-  display: flex;
-  justify-content: space-between;
-}
-
-.app__headerImage {
-  object-fit: contain;
-}
-
-.app__signup {
-  display: flex;
-  flex-direction: column;
-  height: 80vh;
-}
-
-.app__posts {
-  padding: 20px;
-  margin: auto;
-}
-
 .app__footerUpload {
   position: sticky;
   bottom: 0;
@@ -41,25 +14,4 @@
 
 .app__NotSignin {
   text-align: center;
-}
-
-.app__input {
-  min-width: 250px;
-  width: auto;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
-.app__submitButton {
-  margin-top: 20px;
-  padding: 10px;
-  width: 200px;
-  margin-left: 400px;
-}
-
-.app__postLeft {
-  margin: auto;
-  width: 500px;
 }

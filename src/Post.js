@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import "./Post.css";
 import Avatar from "@material-ui/core/Avatar";
-import { db } from "./Firebase";
-import firebase, { auth } from "firebase";
+import { db, auth, storage } from "./Firebase";
 import { Button } from "@material-ui/core";
+import firebase from "firebase";
 
-function Post({ postId, user, username, imageUrl, caption }) {
+function Post({ postId, username, imageUrl, caption }) {
   const [comments, setComments] = useState([]);
   const [comment, setComment] = useState("");
+  const user = auth.currentUser;
 
   useEffect(() => {
     let unsubscribe;
@@ -42,7 +43,12 @@ function Post({ postId, user, username, imageUrl, caption }) {
   const deletePost = (event) => {
     event.preventDefault();
 
-    db.collection("posts").doc(postId).delete();
+    db.collection("posts")
+      .doc(postId)
+      .delete()
+      .then(() => {
+        storage.refFromURL(imageUrl).delete();
+      });
   };
 
   const removeComent = (id) => {
